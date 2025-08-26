@@ -6,7 +6,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.javaweb.vuln</groupId>
     <artifactId>javaweb-vuln</artifactId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -70,6 +70,7 @@
         <javax.persistence-api.version>2.2</javax.persistence-api.version>
         <spring-data-jpa.version>1.11.23.RELEASE</spring-data-jpa.version>
         <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
+        <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mysql-connector-java.version>5.1.49</mysql-connector-java.version>
         <maven-compiler-plugin.version>3.10.1</maven-compiler-plugin.version>
