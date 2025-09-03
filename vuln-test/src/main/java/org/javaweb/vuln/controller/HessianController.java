@@ -14,16 +14,15 @@ import org.springframework.remoting.caucho.HessianServiceExporter;
 @ComponentScan
 public class HessianController {
 
-	@Autowired
-	private HessianService hessianService;
+    @Autowired
+    private HessianService hessianService;
 
-	@Bean(name = "/HessianService")
-	public HessianServiceExporter hessianService() {
-		HessianServiceExporter exporter = new HessianServiceExporter();
-		exporter.setService(hessianService);
-		exporter.setServiceInterface(HessianService.class);
+    @Bean(name = "/HessianService")
+    public HessianServiceExporter hessianService() {
+        HessianServiceExporter exporter = new HessianServiceExporter();
+        exporter.setService(hessianService);
+        exporter.setServiceInterface(HessianService.class);
 
-		return exporter;
-	}
-
+        return exporter;
+    }
 }

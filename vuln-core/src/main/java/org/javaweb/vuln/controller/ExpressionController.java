@@ -3,17 +3,15 @@ package org.javaweb.vuln.controller;
 import ognl.Ognl;
 import ognl.OgnlContext;
 import ognl.OgnlException;
-
 import org.mvel2.MVEL;
+import org.springframework.expression.Expression;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.springframework.expression.Expression;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
@@ -45,28 +43,29 @@ public class ExpressionController {
         Map<String, Object> data = new LinkedHashMap<String, Object>();
         String exp = (String) map.get("exp");
         data.put("data", MVEL.eval(exp));
-
         return data;
     }
 
-    @RequestMapping(value = {"/spel", "/spel.php"})
+    @RequestMapping(value = {"/spel"})
     @ResponseBody
     public Object spelV2(String exp, HttpServletResponse response) {
         SpelExpressionParser parser = new SpelExpressionParser();
         Expression expression = parser.parseExpression(exp);
-        return expression.getValue();
+        Object value = expression.getValue();
+        return value;
     }
 
-    @RequestMapping(value = {"/mvel", "/mvel.php"})
+    @RequestMapping(value = {"/mvel"})
     @ResponseBody
     public Object mvelV2(String exp, HttpServletResponse response) {
         return MVEL.eval(exp);
     }
 
-    @RequestMapping(value = {"/ognl", "/ognl.php"})
+    @RequestMapping(value = {"/ognl"})
     @ResponseBody
-    public Object ognlV2(String exp, HttpServletResponse response) throws OgnlException {
+    public Object ognlV2(@RequestParam("exp") String exp, HttpServletResponse response) throws OgnlException {
         OgnlContext context = new OgnlContext();
-        return Ognl.getValue(exp, context, context.getRoot());
+        Object value = Ognl.getValue(exp, context, context.getRoot());
+        return value;
     }
 }
